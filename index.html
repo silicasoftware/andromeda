@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Andromeda.h Documentation</title>
+<style>
+        body { font-family: Arial, sans-serif; background: #121212; color: #e0e0e0; line-height: 1.6; padding: 20px; }
+        h1, h2, h3 { color: #ffffff; }
+        pre { background: #1e1e1e; color: #00ff00; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        code { color: #00ff00; }
+        .macro { margin-bottom: 15px; padding: 10px; background: #1c1c1c; border-left: 5px solid #007acc; border-radius: 4px; }
+        .macro h3 { margin: 0; font-size: 1.1em; color: #4fc3f7; }
+        .macro p { margin: 5px 0 0; color: #bdbdbd; }
+        ul li { color: #cccccc; }
+    </style>
+</head>
+<body>
+<h1>Andromeda.h Documentation</h1><a href="https://mega.nz/folder/O4xgQAjb#xdg2l8ufvoEUOOhkgmBsOg" style="display:inline-block; padding:10px 20px; background:#007acc; color:white; text-decoration:none; border-radius:5px; margin-top:20px; font-weight:bold;">📥 Download Andromeda Library</a>
+<p>This file defines a set of macros and utilities to create a domain-specific language (DSL) style in C++. Below is a reference documentation for all macros included in <code>andromeda.h</code>.</p>
+<h2>Header Guards</h2>
+<pre><code>#ifndef ANDROMEDA_H
+#define ANDROMEDA_H
+#endif</code></pre>
+<h2>Includes</h2>
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include "array.h"</code></pre>
+<h2>Macro Reference</h2>
+<div class="macro">
+<h3>MAIN(code), START(code), BEGIN(code), PLAY(code), LAUNCH(code)</h3>
+<p>Defines the <code>main</code> entry point with custom naming styles.</p>
+</div>
+<div class="macro">
+<h3>cout_start, cout_end, cin_start, cin_end, cout_insrt, cin_insrt</h3>
+<p>Simplified macros for <code>std::cout</code> and <code>std::cin</code> operations.</p>
+</div>
+<div class="macro">
+<h3>input(query, prefix, isEnable)</h3>
+<p>Handles conditional input with a prefix message.</p>
+</div>
+<div class="macro">
+<h3>var, str, bool, int, doub, char, character, variable, integral, string, float, boolean, double</h3>
+<p>Macros for variable declarations of different types.</p>
+</div>
+<div class="macro">
+<h3>script(data), define(name, data), create(name), run(data)</h3>
+<p>Macros for defining and running functions and code blocks.</p>
+</div>
+<div class="macro">
+<h3>pointer, address, data, p, deference, pointerchange</h3>
+<p>Pointer-related macros to simplify referencing and dereferencing.</p>
+</div>
+<div class="macro">
+<h3>index, indexer</h3>
+<p>Macros for creating <code>switch-case</code> structures.</p>
+</div>
+<div class="macro">
+<h3>loop, forplus, forsub, loopforward, loopbackward, forloop</h3>
+<p>Loop control macros for while-loops and for-loops.</p>
+</div>
+<div class="macro">
+<h3>close, use, steal, nest</h3>
+<p>Namespace manipulation macros.</p>
+</div>
+<div class="macro">
+<h3>print, output</h3>
+<p>Macros for console output with optional prefixes.</p>
+</div>
+<div class="macro">
+<h3>iftrue, iffalse, branch</h3>
+<p>Conditional statement macros.</p>
+</div>
+<div class="macro">
+<h3>class, struct, enum, enum2...enum10</h3>
+<p>Object-oriented macros for class, struct, and enum definitions.</p>
+</div>
+<div class="macro">
+<h3>vector, vector2, vector3, vector4</h3>
+<p>Vector-like integer groupings.</p>
+</div>
+<div class="macro">
+<h3>add, sub, multi, div, add2...add4, sub2...sub4, multi2...multi4, div2...div4</h3>
+<p>Arithmetic helper macros.</p>
+</div>
+<div class="macro">
+<h3>on, off, ON, OFF, ENABLE, DISABLE, enabled, disabled</h3>
+<p>Boolean constants (all evaluate to <code>true</code>).</p>
+</div>
+<div class="macro">
+<h3>logic macros: not, nor, and, or, nand, xor, xnor, buffer</h3>
+<p>Logical operation helpers.</p>
+</div>
+<div class="macro">
+<h3>ping, pulse, say, end</h3>
+<p>Macros for quick output of predefined messages.</p>
+</div>
+<h2>Notes</h2>
+<ul>
+<li>Some macros redefine reserved keywords (like <code>int</code>, <code>bool</code>, <code>class</code>), which may cause conflicts.</li>
+<li>Several macros simplify syntax at the cost of readability and maintainability.</li>
+<li>Intended for experimentation and DSL-style programming, not for production code.</li>
+</ul>
+</body>
+</html>
