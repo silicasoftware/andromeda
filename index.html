@@ -3,104 +3,313 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Andromeda.h Documentation</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Andromeda.h — Macro Reference</title>
 <style>
-        body { font-family: Arial, sans-serif; background: #121212; color: #e0e0e0; line-height: 1.6; padding: 20px; }
-        h1, h2, h3 { color: #ffffff; }
-        pre { background: #1e1e1e; color: #00ff00; padding: 15px; border-radius: 5px; overflow-x: auto; }
-        code { color: #00ff00; }
-        .macro { margin-bottom: 15px; padding: 10px; background: #1c1c1c; border-left: 5px solid #007acc; border-radius: 4px; }
-        .macro h3 { margin: 0; font-size: 1.1em; color: #4fc3f7; }
-        .macro p { margin: 5px 0 0; color: #bdbdbd; }
-        ul li { color: #cccccc; }
-    </style>
-</head>
+    :root{
+      --bg:#0b1020;--panel:#111733;--ink:#e6ebff;--muted:#a8b3d6;--accent:#6ea8ff;--line:#1d264d;--good:#61d095;--warn:#ffbf69;--bad:#ff6b6b;
+      --code-bg:#0d1328;--kbd:#0c1a3a;--mono:#b8c1ff;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{position:sticky;top:0;background:linear-gradient(180deg,rgba(11,16,32,.95),rgba(11,16,32,.65));backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:10}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    h1{font-size:clamp(28px,4vw,40px);margin:0 0 8px 0}
+    h2{margin-top:40px;border-top:1px solid var(--line);padding-top:24px;font-size:clamp(20px,3vw,26px)}
+    h3{margin-top:28px;font-size:20px;color:var(--ink)}
+    p{color:var(--muted)}
+    .sub{color:var(--muted);font-size:15px}
+    .grid{display:grid;grid-template-columns:280px 1fr;gap:28px}
+    nav{position:sticky;top:76px;align-self:start}
+    .toc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+    .toc h4{margin:0 0 10px 0;color:var(--ink)}
+    .toc a{display:block;padding:6px 8px;border-radius:8px;color:var(--muted)}
+    .toc a:hover{background:#0e1633;color:var(--ink)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+    code,kbd,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,Monaco,monospace;font-size:13.5px}
+    pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;color:var(--mono)}
+    code.inline{background:var(--code-bg);padding:.15rem .4rem;border-radius:6px;border:1px solid var(--line);color:var(--mono)}
+    .bad{color:var(--bad)}.warn{color:var(--warn)}.good{color:var(--good)}
+    .tag{display:inline-block;padding:.15rem .5rem;border:1px solid var(--line);background:#0e1633;border-radius:999px;font-size:12px;color:var(--muted)}
+    .hint{border-left:3px solid var(--accent);padding:12px 14px;background:#0e1633;border-radius:10px;margin:12px 0}
+    footer{margin:40px 0;color:var(--muted);text-align:center}
+  </style>
+<style>
+.download-btn {
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 18px;
+  background:#6ea8ff;
+  color:#0b1020;
+  border-radius:12px;
+  font-weight:600;
+  text-decoration:none;
+  transition:background 0.2s;
+}
+.download-btn:hover {
+  background:#8bbdff;
+}
+</style></head>
 <body>
-<h1>Andromeda.h Documentation</h1><a href="https://mega.nz/folder/O4xgQAjb#xdg2l8ufvoEUOOhkgmBsOg" style="display:inline-block; padding:10px 20px; background:#007acc; color:white; text-decoration:none; border-radius:5px; margin-top:20px; font-weight:bold;">📥 Download Andromeda Library</a>
-<p>This file defines a set of macros and utilities to create a domain-specific language (DSL) style in C++. Below is a reference documentation for all macros included in <code>andromeda.h</code>.</p>
-<h2>Header Guards</h2>
-<pre><code>#ifndef ANDROMEDA_H
-#define ANDROMEDA_H
-#endif</code></pre>
-<h2>Includes</h2>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include "array.h"</code></pre>
-<h2>Macro Reference</h2>
-<div class="macro">
-<h3>MAIN(code), START(code), BEGIN(code), PLAY(code), LAUNCH(code)</h3>
-<p>Defines the <code>main</code> entry point with custom naming styles.</p>
+<header>
+<div class="wrap">
+<h1>Andromeda.h — Macro Reference</h1>
+<div class="sub">A domain‑specific macro layer over C++ for fast prototyping of I/O, flow control, and mini‑scripts.</div>
+<a class="download-btn" href="https://mega.nz/folder/O4xgQAjb#xdg2l8ufvoEUOOhkgmBsOg">⬇ Download Library</a></div>
+</header>
+<div class="wrap grid">
+<nav>
+<div class="toc">
+<h4>Contents</h4>
+<a href="#entry">1. Program Entry</a>
+<a href="#io">2. I/O</a>
+<a href="#vars">3. Variables</a>
+<a href="#funcs">4. Functions &amp; Scripts</a>
+<a href="#ptrs">5. Pointers &amp; Memory</a>
+<a href="#flow">6. Control Flow</a>
+<a href="#loops">7. Loops</a>
+<a href="#math">8. Math Helpers</a>
+<a href="#logic">9. Logic Gates</a>
+<a href="#types">10. Structs / Classes / Enums</a>
+<a href="#ns">11. Namespaces</a>
+<a href="#vectors">12. Vectors (int aliases)</a>
+<a href="#flags">13. Flags</a>
+<a href="#misc">14. Misc</a>
+<a href="#notes">Notes &amp; Caveats</a>
 </div>
-<div class="macro">
-<h3>cout_start, cout_end, cin_start, cin_end, cout_insrt, cin_insrt</h3>
-<p>Simplified macros for <code>std::cout</code> and <code>std::cin</code> operations.</p>
-</div>
-<div class="macro">
-<h3>input(query, prefix, isEnable)</h3>
-<p>Handles conditional input with a prefix message.</p>
-</div>
-<div class="macro">
-<h3>var, str, bool, int, doub, char, character, variable, integral, string, float, boolean, double</h3>
-<p>Macros for variable declarations of different types.</p>
-</div>
-<div class="macro">
-<h3>script(data), define(name, data), create(name), run(data)</h3>
-<p>Macros for defining and running functions and code blocks.</p>
-</div>
-<div class="macro">
-<h3>pointer, address, data, p, deference, pointerchange</h3>
-<p>Pointer-related macros to simplify referencing and dereferencing.</p>
-</div>
-<div class="macro">
-<h3>index, indexer</h3>
-<p>Macros for creating <code>switch-case</code> structures.</p>
-</div>
-<div class="macro">
-<h3>loop, forplus, forsub, loopforward, loopbackward, forloop</h3>
-<p>Loop control macros for while-loops and for-loops.</p>
-</div>
-<div class="macro">
-<h3>close, use, steal, nest</h3>
-<p>Namespace manipulation macros.</p>
-</div>
-<div class="macro">
-<h3>print, output</h3>
-<p>Macros for console output with optional prefixes.</p>
-</div>
-<div class="macro">
-<h3>iftrue, iffalse, branch</h3>
-<p>Conditional statement macros.</p>
-</div>
-<div class="macro">
-<h3>class, struct, enum, enum2...enum10</h3>
-<p>Object-oriented macros for class, struct, and enum definitions.</p>
-</div>
-<div class="macro">
-<h3>vector, vector2, vector3, vector4</h3>
-<p>Vector-like integer groupings.</p>
-</div>
-<div class="macro">
-<h3>add, sub, multi, div, add2...add4, sub2...sub4, multi2...multi4, div2...div4</h3>
-<p>Arithmetic helper macros.</p>
-</div>
-<div class="macro">
-<h3>on, off, ON, OFF, ENABLE, DISABLE, enabled, disabled</h3>
-<p>Boolean constants (all evaluate to <code>true</code>).</p>
-</div>
-<div class="macro">
-<h3>logic macros: not, nor, and, or, nand, xor, xnor, buffer</h3>
-<p>Logical operation helpers.</p>
-</div>
-<div class="macro">
-<h3>ping, pulse, say, end</h3>
-<p>Macros for quick output of predefined messages.</p>
-</div>
-<h2>Notes</h2>
+</nav>
+<main>
+<!-- 1. Program Entry -->
+<section class="card" id="entry">
+<h2>1. Program Entry</h2>
+<p>Aliases for <code class="inline">int main() { ... }</code>.</p>
+<pre><code>#define MAIN(code)   int main(){code}
+#define START(code)  int main(){code}
+#define BEGIN(code)  int main(){code}
+#define PLAY(code)   int main(){code}
+#define LAUNCH(code) int main(){code}
+#define _(data)      int main(){data}</code></pre>
+<pre><code>// Example
+MAIN(print("Hello"))
+PLAY(print("Game Started"))</code></pre>
+</section>
+<!-- 2. I/O -->
+<section class="card" id="io">
+<h2>2. Input / Output</h2>
+<h3>Output</h3>
+<pre><code>#define cout_start std::cout &lt;&lt;
+#define cout_insrt &lt;&lt;
+#define cout_end   &lt;&lt; std::endl;
+#define print(x)   std::cout &lt;&lt; x &lt;&lt; std::endl;
+#define output(prefix, data, isEnable) \
+  if(isEnable){ std::cout &lt;&lt; prefix; } \
+  std::cout &lt;&lt; data &lt;&lt; std::endl;
+#define say   std::cout &lt;&lt; "Andromeda: Hello World!" &lt;&lt; std::endl;
+#define ping  std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;
+#define pulse std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl; return 1; // ends main
+#define _p    std::cout &lt;&lt; "Hello World!" &lt;&lt; std::endl;</code></pre>
+<pre><code>// Examples
+cout_start "Value: " cout_insrt 42 cout_end
+output("x = ", 13, true)</code></pre>
+<h3>Input</h3>
+<pre><code>#define cin_start std::cin &gt;&gt;
+#define cin_insrt &gt;&gt;
+#define cin_end   ;
+#define input(var, prefix, isEnable) \
+  if(isEnable){ std::cout &lt;&lt; prefix; } \
+  std::cin &gt;&gt; var;</code></pre>
+<pre><code>// Example
+int age; input(age, "Enter age: ", true)</code></pre>
+</section>
+<!-- 3. Variables -->
+<section class="card" id="vars">
+<h2>3. Variables</h2>
+<p>Convenience macros for declarations.</p>
+<pre><code>#define var(name, value)        auto name = value;
+#define str(name, value)        std::string name = value;
+#define string(name, value)     std::string name = value;
+#define int(name, value)        int name = value;
+#define integral(name, value)   int name = value;
+#define doub(name, value)       double name = value;
+#define double(name, value)     double name = value;
+#define f(name, value)          float name = value;
+#define float(name, value)      float name = value;
+#define char(name, value)       char name = value;
+#define character(name, value)  char name = value;
+#define bool(name, value)       bool name = value;
+#define boolean(name, value)    bool name = value;
+#define variable(T, name, val)  T name = val;
+#define VAR(T, name)            T name;</code></pre>
+<pre><code>// Examples
+str(title, "Andromeda")
+int(counter, 10)
+doub(pi, 3.14159)</code></pre>
+</section>
+<!-- 4. Functions & Scripts -->
+<section class="card" id="funcs">
+<h2>4. Functions &amp; Scripts</h2>
+<pre><code>#define define(name, body)             void name(){ body };
+#define create(name)                   void name();
+#define define2(name, body, param)     void name(param){ body };
+#define run(fn)                        fn();
+#define run2(fn, arg)                  fn(arg);
+#define script(body)                   body;</code></pre>
+<pre><code>// Examples
+define(hello, print("Hello!"))
+run(hello)
+
+define2(square, print(x * x), int x)
+run2(square, 5)</code></pre>
+</section>
+<!-- 5. Pointers -->
+<section class="card" id="ptrs">
+<h2>5. Pointers &amp; Memory</h2>
+<pre><code>#define pointer(alias, var)    auto *alias = &amp;var
+#define address(x)             &amp;x
+#define data(ptr)              *ptr
+#define p(pptr)                **pptr
+#define deference(a, b)        a = *(b)
+#define pointerchange(a, b)    *a b   // raw text substitution</code></pre>
+<pre><code>// Example
+int x = 5; pointer(px, x); print(data(px)) // 5</code></pre>
+</section>
+<!-- 6. Control Flow -->
+<section class="card" id="flow">
+<h2>6. Control Flow</h2>
+<pre><code>#define index(i, code)        case i: code break;
+#define indexer(expr, cases)  switch(expr){ cases }
+#define loop(cond, body)      while(cond){ body }
+#define iftrue(cond, then)    if(cond){ then }
+#define iffalse(cond, then)   if(cond){ then } // identical to iftrue
+#define branch(cond, t, f)    if(cond){ t } else { f }</code></pre>
+<pre><code>// Example
+int which = 2;
+indexer(which,
+  index(1, print("one"))
+  index(2, print("two"))
+)</code></pre>
+</section>
+<!-- 7. Loops -->
+<section class="card" id="loops">
+<h2>7. Loops</h2>
+<pre><code>#define forplus(min, max, body)         for(int i = min; i &lt;= max; i++){ body }
+#define forsub(max, min, body)          for(int i = max; i &lt;= min; i--){ body }
+#define forloop(out, min, max, body)    for(int i = min; i &lt;= max; i++){ body if(out){ std::cout &lt;&lt; i &lt;&lt; std::endl; }}
+#define loopforward(out, min, max, b)   for(int i = min; i &lt;= max; i++){ b if(out){ std::cout &lt;&lt; i &lt;&lt; std::endl; }}
+#define loopbackward(out, max, min, b)  for (int i = 10; i &gt;= 0; i--){ b if(out){ std::cout &lt;&lt; i &lt;&lt; std::endl; }}</code></pre>
+</section>
+<!-- 8. Math -->
+<section class="card" id="math">
+<h2>8. Math Helpers</h2>
+<pre><code>#define add2(a,b)  ((a) + (b))
+#define add3(a,b,c) ((a) + (b) + (c))
+#define add4(a,b,c,d) ((a) + (b) + (c) + (d))
+#define sub2(a,b)  ((a) - (b))
+#define sub3(a,b,c) ((a) - (b) - (c))
+#define sub4(a,b,c,d) ((a) - (b) - (c) - (d))
+#define multi2(a,b) ((a) * (b))
+#define multi3(a,b,c) ((a) * (b) + (c))
+#define multi4(a,b,c,d) ((a) * (b) + (c) + (d))
+#define div2(a,b)   ((a) / (b))
+#define div3(a,b,c) ((a) / (b) + (c))
+#define div4(a,b,c,d) ((a) / (b) + (c) + (d))
+#define add(loops,a,b)   (loops * (a + b))
+#define sub(loops,a,b)   ((a) - (b) * (loops))
+#define multi(loops,a,b) ((a) * (b) * loops)
+#define div(loops,a,b)   ((a) / (b) * (loops))</code></pre>
+<div class="hint warn">Note: <code class="inline">multi3/multi4</code> and <code class="inline">div3/div4</code> add the last terms instead of multiplying/dividing—this may be intentional or a bug.</div>
+</section>
+<!-- 9. Logic Gates -->
+<section class="card" id="logic">
+<h2>9. Logic Gates</h2>
+<pre><code>#define not(a,b)     ((b) = !(a))
+#define nor(a,b,c)   ((c) = !(a || b))
+#define and(a,b,c)   ((c) = (a &amp;&amp; b))
+#define or(a,b,c)    ((c) = (a || b))
+#define nand(a,b,c)  ((c) = !(a &amp;&amp; b))
+#define xor(a,b,c)   ((c) = (a ^ b))
+#define xnor(a,b,c)  ((c) = !(a ^ b))
+#define buffer(a,b)  ((b) = (a))</code></pre>
+</section>
+<!-- 10. Types -->
+<section class="card" id="types">
+<h2>10. Structs, Classes, Enums</h2>
+<pre><code>#define class(name, pub, priv) class name { public: pub private: priv; };
+#define struct(name, body)     struct name { body };
+#define enum(name, body)       enum name { body };
+#define enum2(name,a,b)        enum name { a, b };
+#define enum3(name,a,b,c)      enum name { a, b, c };
+#define enum4(name,a,b,c,d)    enum name { a, b, c, d };
+// ... up to enum10 (typo in original: "emum")</code></pre>
+<div class="hint warn">Caveat: <code class="inline">enum10</code> is misspelled as <code class="inline">emum</code> in the source.</div>
+</section>
+<!-- 11. Namespaces -->
+<section class="card" id="ns">
+<h2>11. Namespace Helpers</h2>
+<pre><code>#define close(name, body)    namespace name { body }
+#define use(space, sym)      space::sym
+#define steal(ns, sym, val)  ns::sym = val
+#define nest(ns, sym, val)   ns::sym = auto val // nonsensical as-is</code></pre>
+</section>
+<!-- 12. Vectors -->
+<section class="card" id="vectors">
+<h2>12. Vectors (simple int fields)</h2>
+<pre><code>#define vector(x)            int x;
+#define vector2(x,y)         int x, y;
+#define vector3(x,y,z)       int x, y, z;
+#define vector4(x,y,z,t)     int x, y, z, t;</code></pre>
+</section>
+<!-- 13. Flags -->
+<section class="card" id="flags">
+<h2>13. Flags</h2>
+<pre><code>#define on true
+#define off false
+#define ON true
+#define OFF false
+#define ENABLE true
+#define DISABLE false
+#define enable true
+#define disable false
+#define ENABLED true
+#define DISABLED false
+#define enabled true
+#define disabled false</code></pre>
+<div class="hint bad">All flags expand to <code class="inline">true</code>. If you expected real toggles, this will be surprising.</div>
+</section>
+<!-- 14. Misc -->
+<section class="card" id="misc">
+<h2>14. Miscellaneous</h2>
+<pre><code>#define container(x) x
+#define END ;
+#define NEXT ;
+#define end return 1;
+#define peek ;
+#define grabbing(x) x;
+#define program(x) x
+#define application(name, x) x
+#define main_program(name, x)     int main(){ x }
+#define main_application(name, x) int main(){ x }
+#define main_function(name, x)    int main(){ x }
+#define flipflop(x) x = !x;
+#define indexer(data, cases) switch(data){ cases }</code></pre>
+</section>
+<!-- Notes -->
+<section class="card" id="notes">
+<h2>Notes &amp; Caveats</h2>
 <ul>
-<li>Some macros redefine reserved keywords (like <code>int</code>, <code>bool</code>, <code>class</code>), which may cause conflicts.</li>
-<li>Several macros simplify syntax at the cost of readability and maintainability.</li>
-<li>Intended for experimentation and DSL-style programming, not for production code.</li>
+<li>Macros are raw text substitutions—watch for side effects, precedence, and multiple evaluations.</li>
+<li><span class="warn">Math helpers:</span> some <code class="inline">multi*</code>/<code class="inline">div*</code> variants add instead of multiply/divide by later args.</li>
+<li><span class="warn">Flags:</span> all map to <code class="inline">true</code>, so <code class="inline">off</code>/<code class="inline">DISABLE</code> behave as enabled.</li>
+<li><span class="warn">Typos:</span> <code class="inline">enum10</code> uses <code class="inline">emum</code>; <code class="inline">loopbackward</code> ignores its max/min inputs and always counts 10→0.</li>
+<li>Prefer wrapping macro arguments in parentheses when used in expressions to avoid precedence surprises.</li>
 </ul>
+</section>
+<footer>
+        Generated reference for <code class="inline">andromeda.h</code>. Tweak styles or copy sections as needed.
+      </footer>
+</main>
+</div>
 </body>
 </html>
