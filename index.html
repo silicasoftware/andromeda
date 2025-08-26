@@ -42,7 +42,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andromeda.h Macro Reference</title>
+  <title>Andromeda.h Macro Reference Library</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -323,10 +323,6 @@ indexer(which,
 
   <h2 id="notes-caveats">Notes & Caveats</h2>
   <pre><code>	Macros are raw text substitutions—watch for side effects, precedence, and multiple evaluations.
-	Math helpers: some multi*/div* variants add instead of multiply/divide by later args.
-	Flags: all map to true, so off/DISABLE behave as enabled.
-	Typos: enum10 uses emum; loopbackward ignores its max/min inputs and always counts 10→0.
-	Prefer wrapping macro arguments in parentheses when used in expressions to avoid precedence surprises.
   </code></pre>
 
   <p>Silica Software @2025</p>
