@@ -211,15 +211,15 @@ indexer(which,
 #define sub4(a,b,c,d) ((a) - (b) - (c) - (d))
 #define multi2(a,b) ((a) * (b))
 #define multi3(a,b,c) ((a) * (b) + (c))
-#define multi4(a,b,c,d) ((a) * (b) + (c) + (d))
+#define multi4(a,b,c,d) ((a) * (b) * (c) * (d))
 #define div2(a,b)   ((a) / (b))
 #define div3(a,b,c) ((a) / (b) + (c))
-#define div4(a,b,c,d) ((a) / (b) + (c) + (d))
+#define div4(a,b,c,d) ((a) / (b) / (c) / (d))
 #define add(loops,a,b)   (loops * (a + b))
 #define sub(loops,a,b)   ((a) - (b) * (loops))
 #define multi(loops,a,b) ((a) * (b) * loops)
 #define div(loops,a,b)   ((a) / (b) * (loops))</code></pre>
-<div class="hint warn">Note: <code class="inline">multi3/multi4</code> and <code class="inline">div3/div4</code> add the last terms instead of multiplying/dividing—this may be intentional or a bug.</div>
+<div class="hint warn">Note: <code class="inline">multi3/multi4</code> and <code class="inline">div3/div4</code> Math matrixs only support up to 4!</div>
 </section>
 <!-- 9. Logic Gates -->
 <section class="card" id="logic">
