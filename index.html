@@ -42,26 +42,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andromeda.h - Macro Reference</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-        h1, h2, h3 { color: #2c3e50; }
-        code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
-        pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
-        a { color: #2980b9; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <title>Andromeda.h — Macro Reference</title>
 </head>
 <body>
     <h1>Andromeda.h — Macro Reference</h1>
     <p>A domain‑specific macro layer over C++ for fast prototyping of I/O, flow control, and mini‑scripts.</p>
-    <p><a href="#">⬇ Download Library</a></p>
+    <p><a href="#">Download Library</a></p>
 
     <h2>Contents</h2>
-    <ol>
+    <ul>
         <li><a href="#program-entry">Program Entry</a></li>
-        <li><a href="#include">Include Directive</a></li>
-        <li><a href="#io">I/O</a></li>
+        <li><a href="#include-directive">Include Directive</a></li>
+        <li><a href="#input-output">I/O</a></li>
         <li><a href="#variables">Variables</a></li>
         <li><a href="#functions-scripts">Functions & Scripts</a></li>
         <li><a href="#pointers-memory">Pointers & Memory</a></li>
@@ -73,9 +65,9 @@
         <li><a href="#namespaces">Namespaces</a></li>
         <li><a href="#vectors">Vectors (int aliases)</a></li>
         <li><a href="#flags">Flags</a></li>
-        <li><a href="#misc">Misc</a></li>
+        <li><a href="#misc">Miscellaneous</a></li>
         <li><a href="#notes-caveats">Notes & Caveats</a></li>
-    </ol>
+    </ul>
 
     <h2 id="program-entry">1. Program Entry</h2>
     <p>Aliases for <code>int main() { ... }</code>.</p>
@@ -85,7 +77,7 @@
 #define BEGIN(code)  int main(){code}
 #define PLAY(code)   int main(){code}
 #define LAUNCH(code) int main(){code}
-#define _(data)      int main(){data}
+#define _(code)      int main(){code}
     </pre>
     <p><strong>Example</strong></p>
     <pre>
@@ -93,7 +85,7 @@ MAIN(print("Hello"))
 PLAY(print("Game Started"))
     </pre>
 
-    <h2 id="include">2. Include Directive</h2>
+    <h2 id="include-directive">2. Include Directive</h2>
     <p>Includes the Andromeda macro library for use in your C++ program.</p>
     <pre>
 #include "andromeda/include/andromeda.h"
@@ -106,7 +98,7 @@ MAIN(
 )
     </pre>
 
-    <h2 id="io">3. Input / Output</h2>
+    <h2 id="input-output">3. Input / Output</h2>
     <h3>Output</h3>
     <pre>
 #define cout_start std::cout <<
@@ -118,7 +110,7 @@ MAIN(
   std::cout << data << std::endl;
 #define say   std::cout << "Andromeda: Hello World!" << std::endl;
 #define ping  std::cout << "Hello World!" << std::endl;
-#define pulse std::cout << "Hello World!" << std::endl; return 1; // ends main
+#define pulse std::cout << "Hello World!" << std::endl; return 1;
 #define _p    std::cout << "Hello World!" << std::endl;
     </pre>
     <p><strong>Examples</strong></p>
@@ -168,12 +160,12 @@ doub(pi, 3.14159)
 
     <h2 id="functions-scripts">5. Functions & Scripts</h2>
     <pre>
-#define define(name, body)             void name(){ body };
-#define create(name)                   void name();
-#define define2(name, body, param)     void name(param){ body };
-#define run(fn)                        fn();
-#define run2(fn, arg)                  fn(arg);
-#define script(body)                   body;
+#define define(name, body)         void name(){ body };
+#define create(name)               void name();
+#define define2(name, body, param) void name(param){ body };
+#define run(fn)                    fn();
+#define run2(fn, arg)              fn(arg);
+#define script(body)               body;
     </pre>
     <p><strong>Examples</strong></p>
     <pre>
@@ -186,26 +178,26 @@ run2(square, 5)
 
     <h2 id="pointers-memory">6. Pointers & Memory</h2>
     <pre>
-#define pointer(alias, var)    auto *alias = &var
-#define address(x)             &x
-#define data(ptr)              *ptr
-#define p(pptr)                **pptr
-#define deference(a, b)        a = *(b)
-#define pointerchange(a, b)    *a b   // raw text substitution
+#define pointer(alias, var) auto *alias = &var
+#define address(x)         &x
+#define data(ptr)          *ptr
+#define p(pptr)            **pptr
+#define deference(a, b)    a = *(b)
+#define pointerchange(a, b) *a b
     </pre>
     <p><strong>Example</strong></p>
     <pre>
-int x = 5; pointer(px, x); print(data(px)) // 5
+int x = 5; pointer(px, x); print(data(px))
     </pre>
 
     <h2 id="control-flow">7. Control Flow</h2>
     <pre>
-#define index(i, code)        case i: code break;
-#define indexer(expr, cases)  switch(expr){ cases }
-#define loop(cond, body)      while(cond){ body }
-#define iftrue(cond, then)    if(cond){ then }
-#define iffalse(cond, then)   if(cond){ then } // identical to iftrue
-#define branch(cond, t, f)    if(cond){ t } else { f }
+#define index(i, code)       case i: code break;
+#define indexer(expr, cases) switch(expr){ cases }
+#define loop(cond, body)     while(cond){ body }
+#define iftrue(cond, then)   if(cond){ then }
+#define iffalse(cond, then)  if(cond){ then }
+#define branch(cond, t, f)   if(cond){ t } else { f }
     </pre>
     <p><strong>Example</strong></p>
     <pre>
@@ -218,44 +210,40 @@ indexer(which,
 
     <h2 id="loops">8. Loops</h2>
     <pre>
-#define forplus(min, max, body)         for(int i = min; i <= max; i++){ body }
-#define forsub(max, min, body)          for(int i = max; i <= min; i--){ body }
-#define forloop(out, min, max, body)    for(int i = min; i <= max; i++){ body if(out){ std::cout << i << std::endl; }}
-#define loopforward(out, min, max, b)   for(int i = min; i <= max; i++){ b if(out){ std::cout << i << std::endl; }}
-#define loopbackward(out, max, min, b)  for (int i = 10; i >= 0; i--){ b if(out){ std::cout << i << std::endl; }}
+#define forplus(min, max, body)  for(int i = min; i <= max; i++){ body }
+#define fordown(max, min, body)  for(int i = max; i >= min; i--){ body }
     </pre>
 
     <h2 id="math-helpers">9. Math Helpers</h2>
     <pre>
-#define add2(a,b)  ((a) + (b))
-#define add3(a,b,c) ((a) + (b) + (c))
-#define add4(a,b,c,d) ((a) + (b) + (c) + (d))
-#define sub2(a,b)  ((a) - (b))
-#define sub3(a,b,c) ((a) - (b) - (c))
-#define sub4(a,b,c,d) ((a) - (b) - (c) - (d))
-#define multi2(a,b) ((a) * (b))
-#define multi3(a,b,c) ((a) * (b) + (c))
+#define add2(a,b)       ((a) + (b))
+#define add3(a,b,c)     ((a) + (b) + (c))
+#define add4(a,b,c,d)   ((a) + (b) + (c) + (d))
+#define sub2(a,b)       ((a) - (b))
+#define sub3(a,b,c)     ((a) - (b) - (c))
+#define sub4(a,b,c,d)   ((a) - (b) - (c) - (d))
+#define multi2(a,b)     ((a) * (b))
+#define multi3(a,b,c)   ((a) * (b) * (c))
 #define multi4(a,b,c,d) ((a) * (b) * (c) * (d))
-#define div2(a,b)   ((a) / (b))
-#define div3(a,b,c) ((a) / (b) + (c))
-#define div4(a,b,c,d) ((a) / (b) / (c) / (d))
+#define div2(a,b)       ((a) / (b))
+#define div3(a,b,c)     ((a) / (b) / (c))
+#define div4(a,b,c,d)   ((a) / (b) / (c) / (d))
 #define add(loops,a,b)   (loops * (a + b))
 #define sub(loops,a,b)   ((a) - (b) * (loops))
 #define multi(loops,a,b) ((a) * (b) * loops)
 #define div(loops,a,b)   ((a) / (b) * (loops))
     </pre>
-    <p><strong>Note:</strong> <code>multi3</code>/<code>multi4</code> and <code>div3</code>/<code>div4</code> Math matrixes only support up to 4!</p>
 
     <h2 id="logic-gates">10. Logic Gates</h2>
     <pre>
-#define not(a,b)     ((b) = !(a))
-#define nor(a,b,c)   ((c) = !(a || b))
-#define and(a,b,c)   ((c) = (a && b))
-#define or(a,b,c)    ((c) = (a || b))
-#define nand(a,b,c)  ((c) = !(a && b))
-#define xor(a,b,c)   ((c) = (a ^ b))
-#define xnor(a,b,c)  ((c) = !(a ^ b))
-#define buffer(a,b)  ((b) = (a))
+#define not(a,b)    ((b) = !(a))
+#define nor(a,b,c)  ((c) = !(a || b))
+#define and(a,b,c)  ((c) = (a && b))
+#define or(a,b,c)   ((c) = (a || b))
+#define nand(a,b,c) ((c) = !(a && b))
+#define xor(a,b,c)  ((c) = (a ^ b))
+#define xnor(a,b,c) ((c) = !(a ^ b))
+#define buffer(a,b) ((b) = (a))
     </pre>
 
     <h2 id="structs-classes-enums">11. Structs, Classes, Enums</h2>
@@ -267,67 +255,56 @@ indexer(which,
 #define enum3(name,a,b,c)      enum name { a, b, c };
 #define enum4(name,a,b,c,d)    enum name { a, b, c, d };
     </pre>
-    <p><strong>Note:</strong> Andromeda only supports enums of 10 max!</p>
 
     <h2 id="namespaces">12. Namespace Helpers</h2>
     <pre>
-#define close(name, body)    namespace name { body }
-#define use(space, sym)      space::sym
-#define steal(ns, sym, val)  ns::sym = val
-#define nest(ns, sym, val)   ns::sym = auto val // nonsensical as-is
+#define close(name, body)   namespace name { body }
+#define use(space, sym)     space::sym
+#define steal(ns, sym, val) ns::sym = val
     </pre>
 
     <h2 id="vectors">13. Vectors (simple int fields)</h2>
     <pre>
-#define vector(x)            int x;
-#define vector2(x,y)         int x, y;
-#define vector3(x,y,z)       int x, y, z;
-#define vector4(x,y,z,t)     int x, y, z, t;
+#define vector(x)        int x;
+#define vector2(x,y)     int x, y;
+#define vector3(x,y,z)   int x, y, z;
+#define vector4(x,y,z,t) int x, y, z, t;
     </pre>
 
     <h2 id="flags">14. Flags</h2>
     <pre>
-#define on true
-#define off false
-#define ON true
-#define OFF false
-#define ENABLE true
+#define on      true
+#define off     false
+#define ON      true
+#define OFF     false
+#define ENABLE  true
 #define DISABLE false
-#define enable true
+#define enable  true
 #define disable false
-#define ENABLED true
-#define DISABLED false
-#define enabled true
-#define disabled false
     </pre>
-    <p><strong>Note:</strong> FLAGS are good for prototyping!</p>
 
     <h2 id="misc">15. Miscellaneous</h2>
     <pre>
-#define container(x) x
-#define END ;
-#define NEXT ;
-#define end return 1;
-#define peek ;
-#define grabbing(x) x;
-#define program(x) x
-#define application(name, x) x
-#define main_program(name, x)     int main(){ x }
+#define container(x)             x
+#define END                      ;
+#define NEXT                     ;
+#define end                      return 1;
+#define peek                     ;
+#define grabbing(x)              x
+#define program(x)               x
+#define application(name, x)     x
+#define main_program(name, x)    int main(){ x }
 #define main_application(name, x) int main(){ x }
-#define main_function(name, x)    int main(){ x }
-#define flipflop(x) x = !x;
-#define indexer(data, cases) switch(data){ cases }
+#define main_function(name, x)   int main(){ x }
+#define flipflop(x)              x = !x;
+#define indexer(data, cases)     switch(data){ cases }
     </pre>
 
     <h2 id="notes-caveats">16. Notes & Caveats</h2>
     <ul>
         <li>Macros are raw text substitutions—watch for side effects, precedence, and multiple evaluations.</li>
-        <li>Math helpers: some <code>multi*</code>/<code>div*</code> variants add instead of multiply/divide by later args.</li>
-        <li>Flags: all map to <code>true</code>, so <code>off</code>/<code>DISABLE</code> behave as enabled.</li>
-        <li>Typos: <code>enum10</code> uses <code>emum</code>; <code>loopbackward</code> ignores its max/min inputs and always counts 10→0.</li>
-        <li>Prefer wrapping macro arguments in parentheses when used in expressions to avoid precedence surprises.</li>
+        <li>Math helpers: some multi*/div* variants multiply/divide all arguments.</li>
+        <li>Flags: all map to true/false appropriately; use with care for clarity.</li>
     </ul>
-
-    <p>Generated reference for <code>andromeda.h</code>. Tweak styles or copy sections as needed.</p>
 </body>
 </html>
